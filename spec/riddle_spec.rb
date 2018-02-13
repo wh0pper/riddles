@@ -12,7 +12,7 @@ describe('Riddles') do
   end
   describe('#eval?') do
     it('compares input with the key answer') do
-      expect(riddle_test.eval?('river')).to(eq(true) | eq(false))
+      expect(riddle_test.eval?('river','What has a bed but doesnt sleep and a mouth but never eats?')).to(eq(true)) 
     end
   end
 end

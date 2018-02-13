@@ -1,4 +1,5 @@
 class Riddles
+attr_reader(:counter)
   def initialize
     @riddles = {
       'river' => 'What has a bed but doesnt sleep and a mouth but never eats?', 'shoe' => 'What has a soul but doesnt live and a tongue but cant taste?', 'plant' => 'You bury me when I’m alive and dig me up when I’m dead. What am I?',
