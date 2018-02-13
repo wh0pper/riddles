@@ -4,23 +4,33 @@ require('pry')
 also_reload('lib/**/*.rb')
 require('./lib/riddle')
 
-@riddles_array = ["What has a bed but doesn’t sleep and a mouth but never eats?", "What has a soul but doesn't live and a tongue but can't taste?", "You bury me when I’m alive and dig me up when I’m dead. What am I?"]
+enable :sessions
 
-get('/') do
-  erb(:welcome)
+before do
   @game = Riddles.new()
 end
 
-get('/riddle1') do
-  @riddle = @game.get_riddle
+get('/') do
+  erb(:welcome)
+end
+
+get('/riddle') do
+  @current_riddle = @game.get_riddle
+  session[:riddle] = @current_riddle
   erb(:riddle)
 end
 
-post('/result') do
+get('/result') do
   answer = @params.fetch('answer')
-  if @game.eval?(answer)
-    erb(:riddle)
+  @current_riddle = session[:riddle]
+  if @game.eval?(answer,@current_riddle)
+    redirect to('/riddle')
   else
     erb(:fail)
   end
+end
+
+get('riddle2') do
+  @riddle2 = @game.get_riddle
+  erb(:riddle2)
 end
