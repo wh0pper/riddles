@@ -16,7 +16,6 @@ attr_reader(:counter)
   end
 
   def eval?(input,riddle)
-    puts "backend: " + riddle
     if (@riddles.key(riddle) == input)
       @counter += 1
       return true
